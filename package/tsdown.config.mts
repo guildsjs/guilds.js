@@ -8,8 +8,9 @@ export default defineConfig({
     format: ["esm", "cjs"],
     minify: false,
     name: "guilds.js",
+    platform: "node",
     removeNodeProtocol: false,
     shims: true,
     skipNodeModulesBundle: true,
-    target: false,
+    target: "node20",
 });
