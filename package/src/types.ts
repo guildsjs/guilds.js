@@ -1,16 +1,26 @@
+import type { Channel } from "@/classes/Channel";
 import type { Client } from "@/classes/Client";
 import type { Message } from "@/classes/Message";
+import type { TextChannel } from "@/classes/TextChannel";
+import type { VoiceChannel } from "@/classes/VoiceChannel";
 import type {
+    ChannelTypes,
     ActivityTypes,
     errorScopes,
     GatewayIntents,
     GatewayOpcodes,
 } from "@/utils/constants";
 
+export type AnyChannel = Channel | TextChannel | VoiceChannel;
+
 export interface AvatarURLProps {
     size: 128 | 256 | 512 | 1024 | 2048 | 4096;
     format?: "webp" | "png" | "jpg" | "gif";
 }
+
+export type ChannelType =
+    | keyof typeof ChannelTypes
+    | (typeof ChannelTypes)[keyof typeof ChannelTypes];
 
 export type ClientEvents = {
     debug: [message: string];
@@ -33,11 +43,16 @@ export interface ClientProps {
     presence?: Partial<ClientPresence>;
 }
 
+export interface ClientStructureFetchOptions {
+    force?: boolean;
+}
+
 export type CreateMessageProps = Partial<{
     content: string;
 }>;
 
 export type ErrorScope = (typeof errorScopes)[keyof typeof errorScopes];
+
 export type GatewayIntent =
     | keyof typeof GatewayIntents
     | (typeof GatewayIntents)[keyof typeof GatewayIntents];

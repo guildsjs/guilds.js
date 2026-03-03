@@ -12,6 +12,22 @@ export const ActivityTypes = {
 /** The base API url for contacting Discord's v10 API */
 export const baseApiUrl = "https://discord.com/api/v10";
 
+export const ChannelTypes = {
+    AnnouncementThread: 10,
+    DM: 1,
+    GroupDM: 3,
+    GuildAnnouncement: 5,
+    GuildCategory: 4,
+    GuildDirectory: 14,
+    GuildForum: 15,
+    GuildMedia: 16,
+    GuildStageVoice: 13,
+    GuildText: 0,
+    GuildVoice: 2,
+    PrivateThread: 12,
+    PublicThread: 11,
+} as const;
+
 export const defaultClientPresence: ClientPresence = {
     platform: "desktop",
     status: "online",

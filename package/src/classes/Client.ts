@@ -1,4 +1,5 @@
 import { CacheManager } from "@/classes/CacheManager";
+import { Channel } from "@/classes/Channel";
 import { ClientUser } from "@/classes/ClientUser";
 import { Endpoints } from "@/utils/endpoints";
 import { EventHandler } from "@/classes/EventHandler";
@@ -15,10 +16,12 @@ import {
     GatewayOpcodes,
 } from "@/utils/constants";
 import type {
+    AnyChannel,
     ClientEvents,
     ClientPresence,
     ClientPresenceProps,
     ClientProps,
+    ClientStructureFetchOptions,
     CreateMessageProps,
     GatewayPayload,
 } from "@/types";
@@ -71,10 +74,11 @@ export class Client extends EventHandler<ClientEvents> {
 
     /** Internal cache for API structures */
     public cache = {
+        channels: new CacheManager<AnyChannel>(),
         guilds: new CacheManager<Guild>(),
         messages: new CacheManager<Message>(),
         users: new CacheManager<User>(),
-    } as const;
+    };
 
     /**
      * Instantiate a new client
@@ -296,6 +300,35 @@ export class Client extends EventHandler<ClientEvents> {
     }
 
     /**
+     * Fetch a channel by its ID
+     * @param id ID of the channel to fetch
+     * @param options Fetch options
+     * @returns Channel object or null
+     */
+    public async fetchChannel<T extends AnyChannel = Channel>(
+        id: string,
+        options: ClientStructureFetchOptions = { force: false }
+    ): Promise<T | null> {
+        if (!options?.force) {
+            const cached = this.cache.channels.get(id);
+
+            if (cached) {
+                return cached as T;
+            }
+        }
+
+        const res = await this.rest.get(Endpoints.channel(id));
+
+        if (!res.ok) {
+            return null;
+        }
+
+        const channel = new Channel(this, res.data);
+        this.cache.channels.set(id, channel);
+        return channel as T;
+    }
+
+    /**
      * Fetches a guild by its ID
      * @param id ID of the guild to fetch
      * @param options Fetch options
@@ -303,7 +336,7 @@ export class Client extends EventHandler<ClientEvents> {
      */
     public async fetchGuild(
         id: string,
-        options?: { force?: boolean }
+        options: ClientStructureFetchOptions = { force: false }
     ): Promise<Guild | null> {
         if (!options?.force) {
             const cached = this.cache.guilds.get(id);
@@ -332,7 +365,7 @@ export class Client extends EventHandler<ClientEvents> {
      */
     public async fetchUser(
         id: string = "@me",
-        options?: { force?: boolean }
+        options: ClientStructureFetchOptions = { force: false }
     ): Promise<User | null> {
         if (!options?.force) {
             const cached = this.cache.users.get(id);
