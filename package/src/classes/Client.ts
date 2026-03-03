@@ -55,7 +55,7 @@ export class Client extends EventHandler<ClientEvents> {
     /** The client's current presence configuration */
     public presence: ClientPresence = defaultClientPresence;
 
-    /** Whether the Dispatch (i.e., ready) event was received */
+    /** Whether the Dispatch (ready) event was received */
     public ready: boolean = false;
 
     /** REST manager used for API requests */

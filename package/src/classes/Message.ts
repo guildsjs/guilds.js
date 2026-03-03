@@ -9,7 +9,10 @@ export class Message {
     /** The client associated with this message */
     public client: Client;
 
-    /** The content of the message, if exists */
+    /**
+     * The content of the message, if exists
+     * (may return empty string if message content intent is disabled)
+     */
     public content?: string;
 
     /** Unique Discord message ID */

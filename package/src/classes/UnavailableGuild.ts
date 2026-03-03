@@ -1,7 +1,10 @@
 import type { APIUnavailableGuild } from "discord-api-types/v10";
 import { Client } from "@/classes/Client";
 
-/** Class representing a Guild unavailable due to outages */
+/**
+ * Class representing a Guild unavailable due to a Discord outage
+ * @see https://docs.discord.com/developers/resources/guild#unavailable-guild-object
+ */
 export class UnavailableGuild {
     /** The client associated with this unavailable guild */
     public client: Client;

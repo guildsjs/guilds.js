@@ -2,7 +2,7 @@ import type { APIGuild } from "discord-api-types/v10";
 import { Client } from "@/classes/Client";
 
 /**
- * Class representing a Discord guild (i.e. "server" in the UI)
+ * Class representing a Discord guild (known as a "server" in the UI)
  * @see https://docs.discord.com/developers/resources/guild#guild-object
  */
 export class Guild {

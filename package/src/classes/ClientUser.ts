@@ -2,7 +2,10 @@ import type { APIUser } from "discord-api-types/v10";
 import { Client } from "@/classes/Client";
 import { User } from "@/classes/User";
 
-/** Class representing the user of the client */
+/**
+ * Class representing the user of the client only
+ * @see https://docs.discord.com/developers/resources/user#user-object
+ */
 export class ClientUser extends User {
     /** The user's about me (client user only) */
     public bio?: string;
