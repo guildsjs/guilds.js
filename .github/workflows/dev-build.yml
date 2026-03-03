@@ -43,12 +43,6 @@ jobs:
             - name: Transpile package
               run: pnpm build --filter guilds.js
 
-            - name: Publish package
-              working-directory: package
-              env:
-                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-              run: pnpm publish --tag dev --access public --no-git-checks
-
             - name: Deprecate previous dev version
               run: |
                   node --input-type=module << 'EOF'
@@ -86,3 +80,9 @@ jobs:
               env:
                   NEW_VERSION: ${{ env.DEV_VERSION }}
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+            - name: Publish package
+              working-directory: package
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+              run: pnpm publish --tag dev --access public --no-git-checks
