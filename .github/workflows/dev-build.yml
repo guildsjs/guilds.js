@@ -55,16 +55,23 @@ jobs:
                   import { readFile } from 'node:fs/promises';
                   import { execSync } from 'node:child_process';
 
-                  const pkgPath = './package/package.json';
-                  const pkgJson = await readFile(pkgPath, 'utf8');
-                  const pkg = JSON.parse(pkgJson);
-                  const pkgName = pkg.name;
+                  const pkgJson = await readFile('./package/package.json', 'utf8');
+                  const { name: pkgName } = JSON.parse(pkgJson);
+                  const stdout = execSync(`pnpm view "${pkgName}" versions --json`, { encoding: 'utf8' })
 
-                  const { stdout } = await execSync(`pnpm view "${pkgName}" versions --json`, { encoding: 'utf8' });
+                  await new Promise(resolve => setTimeout(resolve, 3000));
+
+                  console.log('Raw stdout:', stdout);
+
+                  if (!stdout || !stdout.trim()) {
+                    console.log('No development version to deprecate.');
+                    process.exit(0);
+                  }
+
                   const versions = JSON.parse(stdout);
-                  const devs = versions.filter((version) => version.includes('-dev.'));
+                  const devVersions = versions.filter((version) => version.includes('-dev.'));
                   const newVersion = process.env.NEW_VERSION;
-                  const prev = devs.filter((version) => version !== newVersion).pop();
+                  const prev = devVersions.filter((version) => version !== newVersion).pop();
 
                   if (prev) {
                     console.log(`Deprecating ${pkgName}@${prev}`);
@@ -74,6 +81,7 @@ jobs:
                       env: { ...process.env, NODE_AUTH_TOKEN: process.env.NODE_AUTH_TOKEN },
                     });
                   }
+
                   EOF
               env:
                   NEW_VERSION: ${{ env.DEV_VERSION }}
