@@ -13,7 +13,7 @@ export class Channel {
 
     /**
      * Instantiate a new channel
-     * @param client Associated channel
+     * @param client Associated client
      * @param data Discord API channel data
      * @returns Channel object
      */
