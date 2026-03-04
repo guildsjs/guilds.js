@@ -69,11 +69,7 @@ export class User {
      * @returns CDN URL or null
      */
     public avatarURL(props: AvatarURLProps): string | null {
-        if (
-            !props ||
-            !props.size ||
-            (props.format && typeof props.format !== "string")
-        ) {
+        if (!props || !props.size || (props.format && typeof props.format !== "string")) {
             throw new TypeError("Invalid user avatar URL props provided");
         }
 

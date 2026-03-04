@@ -14,10 +14,7 @@ export class EventHandler<Events extends Record<string, any[]>> {
      * @param event Event name
      * @param listener Listener callback
      */
-    public on<K extends keyof Events>(
-        event: K,
-        listener: (...args: Events[K]) => any
-    ) {
+    public on<K extends keyof Events>(event: K, listener: (...args: Events[K]) => any) {
         if (!this.#listeners[event]) {
             this.#listeners[event] = [];
         }
@@ -31,10 +28,7 @@ export class EventHandler<Events extends Record<string, any[]>> {
      * @param event Event name
      * @param listener Listener callback
      */
-    public once<K extends keyof Events>(
-        event: K,
-        listener: (...args: Events[K]) => any
-    ) {
+    public once<K extends keyof Events>(event: K, listener: (...args: Events[K]) => any) {
         const wrapped = (...args: Events[K]) => {
             listener(...args);
             this.off(event, wrapped);
@@ -49,17 +43,12 @@ export class EventHandler<Events extends Record<string, any[]>> {
      * @param event Event name
      * @param listener Listener callback
      */
-    public off<K extends keyof Events>(
-        event: K,
-        listener: (...args: Events[K]) => any
-    ) {
+    public off<K extends keyof Events>(event: K, listener: (...args: Events[K]) => any) {
         if (!this.#listeners[event]) {
             return this;
         }
 
-        this.#listeners[event] = this.#listeners[event]!.filter(
-            (l) => l !== listener
-        );
+        this.#listeners[event] = this.#listeners[event]!.filter((l) => l !== listener);
 
         return this;
     }

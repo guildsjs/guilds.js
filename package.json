@@ -9,8 +9,8 @@
     "scripts": {
         "build": "turbo run build",
         "dev": "turbo run dev",
-        "format": "prettier --write . --config package.json",
-        "lint": "tsc -p ./package --noEmit; prettier . --check --config package.json --ignore-path .prettierignore"
+        "format": "turbo run format",
+        "lint": "turbo run lint"
     },
     "devDependencies": {
         "prettier": "^3.8.1",
@@ -20,7 +20,7 @@
     "prettier": {
         "arrowParens": "always",
         "jsxSingleQuote": false,
-        "printWidth": 85,
+        "printWidth": 90,
         "quoteProps": "as-needed",
         "semi": true,
         "singleQuote": false,
