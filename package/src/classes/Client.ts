@@ -212,9 +212,9 @@ export class Client extends EventHandler<ClientEvents> {
                 this.lastHeartbeatAck = true;
                 this.heartbeatInterval = setInterval(() => {
                     if (!this.lastHeartbeatAck) {
-                        this.emit("debug", "Heartbeat ACK failed, reconnecting...");
+                        this.emit("debug", "Heartbeat ACK failed");
+                        this.ws?.close(4000, "Heartbeat ACK failed");
 
-                        this.ws?.close(4000, "Heartbeat failed");
                         return;
                     }
 
@@ -228,6 +228,8 @@ export class Client extends EventHandler<ClientEvents> {
                 }, payload.d.heartbeat_interval);
 
                 if (this.sessionId) {
+                    this.emit("debug", "Resuming session");
+
                     this.ws?.send(
                         JSON.stringify({
                             op: GatewayOpcodes.Resume,
@@ -238,9 +240,9 @@ export class Client extends EventHandler<ClientEvents> {
                             },
                         })
                     );
-
-                    this.emit("debug", "Resuming  session...");
                 } else {
+                    this.emit("debug", "Identifying");
+
                     this.ws?.send(
                         JSON.stringify({
                             op: GatewayOpcodes.Identify,
@@ -263,8 +265,6 @@ export class Client extends EventHandler<ClientEvents> {
                             },
                         })
                     );
-
-                    this.emit("debug", "Identifying...");
                 }
 
                 break;
