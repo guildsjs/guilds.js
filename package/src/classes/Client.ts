@@ -21,7 +21,7 @@ import {
 } from "@/utils/constants";
 import type {
     AnyChannel,
-    ClientEvents,
+    TypeMappedClientEvents,
     ClientPresence,
     ClientPresenceProps,
     ClientProps,
@@ -31,7 +31,7 @@ import type {
 } from "@/types";
 
 /** Class representing a Discord client */
-export class Client extends EventHandler<ClientEvents> {
+export class Client extends EventHandler<TypeMappedClientEvents> {
     #token: string;
 
     /**
@@ -93,7 +93,10 @@ export class Client extends EventHandler<ClientEvents> {
         super();
 
         if (!props || typeof props !== "object") {
-            throw new GuildsError("Invalid client props provided", "ClientPropsError");
+            throw new GuildsError(
+                "Invalid client props provided",
+                "ClientPropsError"
+            );
         }
 
         if (!props.token || typeof props.token !== "string") {
@@ -103,7 +106,8 @@ export class Client extends EventHandler<ClientEvents> {
         if (
             props.intents === null ||
             props.intents === undefined ||
-            (Array.isArray(props.intents) == false && typeof props.intents !== "number")
+            (Array.isArray(props.intents) == false &&
+                typeof props.intents !== "number")
         ) {
             throw new GuildsError("Invalid intents provided", "ClientIntentsError");
         }
@@ -472,15 +476,17 @@ export class Client extends EventHandler<ClientEvents> {
                         status: this.presence.status,
                         since: null,
                         afk: false,
-                        activities: (this.presence.activities ?? []).map((activity) => ({
-                            ...activity,
-                            type:
-                                typeof activity.type === "string"
-                                    ? ActivityTypes[
-                                          activity.type as keyof typeof ActivityTypes
-                                      ]
-                                    : activity.type,
-                        })),
+                        activities: (this.presence.activities ?? []).map(
+                            (activity) => ({
+                                ...activity,
+                                type:
+                                    typeof activity.type === "string"
+                                        ? ActivityTypes[
+                                              activity.type as keyof typeof ActivityTypes
+                                          ]
+                                        : activity.type,
+                            })
+                        ),
                     },
                 })
             );

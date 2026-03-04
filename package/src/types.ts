@@ -22,7 +22,7 @@ export type ChannelType =
     | keyof typeof ChannelTypes
     | (typeof ChannelTypes)[keyof typeof ChannelTypes];
 
-export type ClientEvents = {
+export type TypeMappedClientEvents = {
     debug: [message: string];
     error: [error: any];
     messageCreate: [message: Message];
