@@ -299,8 +299,16 @@ export class Client extends EventHandler<ClientEvents> {
             throw new GuildsError("Invalid message data", "CreateMessageError");
         }
 
+        const body: Record<string, unknown> = { content: props.content };
+
+        if (props.referenceMessageId) {
+            body.message_reference = {
+                message_id: props.referenceMessageId,
+            };
+        }
+
         await this.rest.post(Endpoints.channelMessages(channelId), {
-            body: JSON.stringify(props),
+            body: JSON.stringify(body),
         });
     }
 

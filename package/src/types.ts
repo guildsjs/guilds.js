@@ -49,6 +49,7 @@ export interface ClientStructureFetchOptions {
 
 export type CreateMessageProps = Partial<{
     content: string;
+    referenceMessageId: string;
 }>;
 
 export type ErrorScope = (typeof errorScopes)[keyof typeof errorScopes];
