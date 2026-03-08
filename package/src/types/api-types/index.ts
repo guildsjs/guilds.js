@@ -27,7 +27,7 @@ import type {
     StickerTypes,
     TeamMemberMembershipStates,
     TeamMemberRoleTypes,
-} from "@/constants"
+} from "@/types/api-types/constants"
 
 /** @see https://docs.discord.com/developers/resources/application#application-object */
 export interface Application {
