@@ -51,7 +51,11 @@ export class Gateway {
             const payload = JSON.parse(message.data.toString())
 
             if (payload.t) {
-                this.events.emit(payload.t, payload.d)
+                this.events.emit(payload.t, {
+                    rest: this.rest,
+                    gateway: this,
+                    data: payload.d,
+                })
             }
         }
 
