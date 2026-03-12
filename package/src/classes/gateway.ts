@@ -3,18 +3,32 @@ import { EventHandler } from "@/classes/event-handler"
 import { RESTManager } from "@/classes/rest-manager"
 import { parseToken } from "@/functions/parse-token"
 
+/** Connects to Discord Gateway */
 export class Gateway {
     #token: string
 
+    /** Event handler for gateway dispatch events */
     public events = new EventHandler<GatewayEventMap>()
+
+    /** Client intents bitfield */
     public intents: number
+
+    /** Used for REST API calls */
     public rest: RESTManager
+
+    /** WebSocket for connecting to Discord's gateway */
     public ws?: WebSocket
 
+    /** Client token used for authorization */
     public get token() {
         return this.#token
     }
 
+    /**
+     * Instantiate a new Gateway
+     * @param props Gateway props
+     * @returns Gateway instance
+     */
     public constructor(props: GatewayProps) {
         if (!props || typeof props !== "object") {
             throw new TypeError("Invalid props provided")
@@ -39,6 +53,10 @@ export class Gateway {
         return this
     }
 
+    /**
+     * Connect to Discord's gateway
+     * @returns Gateway instance
+     */
     public async connect() {
         const res = await this.rest.get<{ url: string }>("/gateway/bot")
 
