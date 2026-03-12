@@ -27,7 +27,7 @@ import type {
     APIStickerTypes,
     APITeamMemberMembershipStates,
     APITeamMemberRoleTypes,
-} from "@/api/constants"
+} from "@/api"
 
 /** @see https://docs.discord.com/developers/resources/application#application-object */
 export interface APIApplication {

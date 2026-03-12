@@ -1,6 +1,8 @@
 // Types
 export type * from "@/types"
-export type * from "@/api/types"
+
+// Discord API
+export * from "@/api"
 
 // Classes
 export * from "@/classes/client"
@@ -10,7 +12,6 @@ export * from "@/classes/rest-manager"
 
 // Constants
 export * from "@/constants"
-export * from "@/api/constants"
 
 // Functions
 export * from "@/functions/parse-token"
