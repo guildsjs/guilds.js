@@ -1,6 +1,6 @@
 import type { Gateway } from "@/classes/gateway"
 import type { RESTManager } from "@/classes/rest-manager"
-import type { APIGuildMember, APIMessage, APISnowflake, APIUser } from "@/api"
+import type { GuildMember, Message, Snowflake, User } from "@/api"
 
 export interface ClientProps {
     gateway: Gateway
@@ -22,22 +22,22 @@ export type GatewayEventMap = {
 
 /** @see https://docs.discord.com/developers/events/gateway-events */
 export interface GatewayEvents {
-    MESSAGE_CREATE: APIMessage & {
-        guild_id?: APISnowflake
-        member?: Partial<APIGuildMember>
-        mentions: (APIUser & { member?: Partial<APIGuildMember> | null })[]
+    MESSAGE_CREATE: Message & {
+        guild_id?: Snowflake
+        member?: Partial<GuildMember>
+        mentions: (User & { member?: Partial<GuildMember> | null })[]
     }
 
     MESSAGE_DELETE: {
-        channel_id: APISnowflake
-        guild_id?: APISnowflake
-        id: APISnowflake
+        channel_id: Snowflake
+        guild_id?: Snowflake
+        id: Snowflake
     }
 
-    MESSAGE_UPDATE: APIMessage & { tts: false }
+    MESSAGE_UPDATE: Message & { tts: false }
 
     READY: {
-        user: APIUser
+        user: User
         session_id: string
     }
 
