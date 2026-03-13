@@ -74,7 +74,7 @@ export interface ApplicationCommandData {
     guild_id?: Snowflake
     id: Snowflake
     name: string
-    options: ApplicationCommandInteractionDataOption[]
+    options?: ApplicationCommandInteractionDataOption[]
     resolved?: Resolved
     target_id?: Snowflake
     type: ApplicationCommandType
@@ -203,13 +203,73 @@ export interface ChannelOverwrite {
 }
 
 export type ChannelOverwriteType = ConstValues<typeof ChannelOverwriteTypes>
+
+/** @see https://docs.discord.com/developers/components/reference#channel-select-channel-select-interaction-response-structure */
+export interface ChannelSelectInteractionResponse {
+    component_type: 8
+    custom_id: string
+    id: number
+    resolved: Resolved
+    type: 8
+    values: Snowflake[]
+}
+
 export type ChannelType = ConstValues<typeof ChannelTypes>
 export type ChannelVideoQualityMode = ConstValues<typeof ChannelVideoQualityModes>
+
+/** @see https://docs.discord.com/developers/components/reference#checkbox-group-structure */
+export interface CheckboxGroup {
+    custom_id: string
+    id?: number
+    max_values?: number
+    min_values?: number
+    options: CheckboxGroupOption[] // https://docs.discord.com/developers/components/reference#checkbox-group-option-structure
+    required?: boolean
+    type: 22
+}
+
+/** @see https://docs.discord.com/developers/components/reference#checkbox-group-interaction-response-structure */
+export interface CheckboxGroupInteractionResponse {
+    custom_id: string
+    id: number
+    type: 22
+    values: string[]
+}
+
+/** @see https://docs.discord.com/developers/components/reference#checkbox-group-option-structure */
+export interface CheckboxGroupOption {
+    default?: boolean
+    description?: string
+    label: string
+    value: string
+}
+
+/** @see https://docs.discord.com/developers/components/reference#checkbox-interaction-response-structure */
+export interface CheckboxInteractionResponse {
+    custom_id: string
+    id: number
+    type: 23
+    value: boolean
+}
 
 /** @see https://docs.discord.com/developers/resources/user#collectibles */
 export interface Collectibles {
     nameplate?: Nameplate
 }
+
+/** @see https://docs.discord.com/developers/interactions/receiving-and-responding#interaction-object-component-interaction-response-structures */
+export type ComponentInteractionResponse =
+    | ChannelSelectInteractionResponse
+    | CheckboxGroupInteractionResponse
+    | CheckboxInteractionResponse
+    | FileUploadInteractionResponse
+    | LabelInteractionResponse
+    | MentionableSelectInteractionResponse
+    | RadioGroupInteractionResponse
+    | RoleSelectInteractionResponse
+    | StringSelectInteractionResponse
+    | TextInputInteractionResponse
+    | UserSelectInteractionResponse
 
 /** @see https://docs.discord.com/developers/resources/message#embed-object */
 export interface Embed {
@@ -311,6 +371,14 @@ export interface Entitlement {
 
 /** @see https://docs.discord.com/developers/resources/entitlement#entitlement-object-entitlement-types */
 export type EntitlementType = ConstValues<typeof EntitlementTypes>
+
+/** @see https://docs.discord.com/developers/components/reference#file-upload-file-upload-interaction-response-structure */
+export interface FileUploadInteractionResponse {
+    type: 19
+    id: number
+    custom_id: string
+    values: Snowflake[]
+}
 
 /** @see https://docs.discord.com/developers/resources/channel#default-reaction-object */
 export interface ForumDefaultReaction {
@@ -478,14 +546,38 @@ export interface Interaction {
 /** @see https://docs.discord.com/developers/interactions/receiving-and-responding#interaction-object-interaction-context-types */
 export type InteractionContextType = ConstValues<typeof InteractionContextTypes>
 
-/** @see  */
-export interface InteractionData {}
+/** @see https://docs.discord.com/developers/interactions/receiving-and-responding#interaction-object-interaction-data */
+export type InteractionData =
+    | ApplicationCommandData
+    | MessageComponentData
+    | ModalSubmitData
+    | undefined
 
 /** @see https://docs.discord.com/developers/interactions/receiving-and-responding#interaction-object-interaction-type */
 export type InteractionType = ConstValues<typeof InteractionTypes>
 
+/** @see https://docs.discord.com/developers/reference#iso8601-date%2Ftime */
+export type ISO8601Timestamp = string
+
+/** @see https://docs.discord.com/developers/components/reference#label-label-interaction-response-structure */
+export interface LabelInteractionResponse {
+    component: ComponentInteractionResponse
+    id: number
+    type: 18
+}
+
 /** @see https://docs.discord.com/developers/reference#locales */
 export type Locale = ConstValues<typeof Locales> | (string & {})
+
+/** @see https://docs.discord.com/developers/components/reference#mentionable-select-mentionable-select-interaction-response-structure */
+export interface MentionableSelectInteractionResponse {
+    component_type: 7
+    custom_id: string
+    id: number
+    resolved: Resolved
+    type: 7
+    values: Snowflake[]
+}
 
 /** @see https://docs.discord.com/developers/resources/message#message-object */
 export interface Message {
@@ -541,6 +633,14 @@ export interface MessageComponent {
     type: MessageComponentType
 }
 
+/** @see https://docs.discord.com/developers/interactions/receiving-and-responding#interaction-object-message-component-data-structure */
+export interface MessageComponentData {
+    custom_id: string
+    component_type: MessageComponentType
+    values?: SelectOption[]
+    resolved?: Resolved
+}
+
 /** @see https://docs.discord.com/developers/components/reference#component-object-component-types */
 export type MessageComponentType = ConstValues<typeof MessageComponentTypes>
 
@@ -590,6 +690,13 @@ export interface MessageStickerItem {
 
 /** @see https://docs.discord.com/developers/resources/message#message-object-message-types */
 export type MessageType = ConstValues<typeof MessageTypes>
+
+/** @see https://docs.discord.com/developers/interactions/receiving-and-responding#interaction-object-modal-submit-data-structure */
+export interface ModalSubmitData {
+    components: ComponentInteractionResponse[] // https://docs.discord.com/developers/interactions/receiving-and-responding#interaction-object-component-interaction-response-structures
+    custom_id: string
+    resolved?: Resolved
+}
 
 /** @see https://docs.discord.com/developers/resources/user#nameplate-nameplate-structure */
 export interface Nameplate {
@@ -650,6 +757,14 @@ export interface PollResults {
     is_finalized: boolean
 }
 
+/** @see https://docs.discord.com/developers/components/reference#radio-group-interaction-response-structure */
+export interface RadioGroupInteractionResponse {
+    custom_id: string
+    id: number
+    type: 21
+    value: string | null
+}
+
 /** @see https://docs.discord.com/developers/resources/message#reaction-object */
 export interface Reaction {
     burst_colors: string[]
@@ -700,6 +815,16 @@ export interface RoleColors {
     tertiary_color: number | null
 }
 
+/** @see https://docs.discord.com/developers/components/reference#role-select-role-select-interaction-response-structure */
+export interface RoleSelectInteractionResponse {
+    component_type: 6
+    custom_id: string
+    id: number
+    resolved: Resolved
+    type: 6
+    values: Snowflake[]
+}
+
 /** @see https://docs.discord.com/developers/resources/message#role-subscription-data-object */
 export interface RoleSubscriptionData {
     is_renewal: boolean
@@ -716,6 +841,18 @@ export interface RoleTags {
     integration_id?: Snowflake
     premium_subscriber?: null
     subscription_listing_id?: Snowflake
+}
+
+export interface SelectOption {
+    default?: boolean
+    description?: string
+    emoji?: Partial<Emoji> & {
+        animated?: boolean
+        id: Snowflake | null
+        name: string | null
+    }
+    label: string
+    value: string
 }
 
 /** @see https://docs.discord.com/developers/reference#snowflakes */
@@ -741,6 +878,15 @@ export type StickerFormatType = ConstValues<typeof StickerFormatTypes>
 
 /** @see https://docs.discord.com/developers/resources/sticker#sticker-object-sticker-types */
 export type StickerType = ConstValues<typeof StickerTypes>
+
+/** @see https://docs.discord.com/developers/components/reference#string-select-string-select-interaction-response-structure */
+export interface StringSelectInteractionResponse {
+    component_type: 3
+    custom_id: string
+    id: number
+    type: 3
+    values: string[]
+}
 
 /** @see https://docs.discord.com/developers/topics/teams#data-models-team-object */
 export interface Team {
@@ -784,6 +930,27 @@ export interface ThreadMetadata {
     locked: boolean
 }
 
+/** @see https://docs.discord.com/developers/components/reference#text-display */
+export interface TextDisplay {
+    content: string
+    id?: number
+    type: 10
+}
+
+/** @see https://docs.discord.com/developers/components/reference#text-display-text-display-interaction-response-structure */
+export interface TextDisplayInteractionResponse {
+    type: 10
+    id: number
+}
+
+/** @see https://docs.discord.com/developers/components/reference#text-input-text-input-interaction-response-structure */
+export interface TextInputInteractionResponse {
+    custom_id: string
+    id: number
+    type: 4
+    value: string
+}
+
 /** @see https://docs.discord.com/developers/resources/user#user-object */
 export interface User {
     accent_color?: number
@@ -815,6 +982,16 @@ export interface UserPrimaryGuild {
     tag: string | null
 }
 
+/** @see https://docs.discord.com/developers/components/reference#user-select-user-select-interaction-response-structure */
+export interface UserSelectInteractionResponse {
+    component_type: 5
+    custom_id: string
+    id: number
+    resolved: Resolved
+    type: 5
+    values: Snowflake[]
+}
+
 /** @see https://docs.discord.com/developers/events/webhook-events#event-types */
 export type WebhookEventType =
     | "APPLICATION_AUTHORIZED"
@@ -829,6 +1006,3 @@ export type WebhookEventType =
     | "LOBBY_MESSAGE_DELETE"
     | "LOBBY_MESSAGE_UPDATE"
     | "QUEST_USER_ENROLLMENT"
-
-/** @see https://docs.discord.com/developers/reference#iso8601-date%2Ftime */
-export type ISO8601Timestamp = string
