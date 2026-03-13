@@ -70,11 +70,29 @@ export class Gateway {
 
             if (payload.t) {
                 this.events.emit(payload.t, {
-                    rest: this.rest,
-                    gateway: this,
                     data: payload.d,
+                    gateway: this,
+                    rest: this.rest,
                 })
             }
+        }
+
+        this.ws.onerror = (error) => {
+            this.events.emit("WS_ERROR", {
+                data: `${error}`,
+                gateway: this,
+                rest: this.rest,
+            })
+
+            throw new Error(`DiscordGatewayError: ${error}`)
+        }
+
+        this.ws.onclose = (event) => {
+            this.events.emit("WS_DEBUG", {
+                data: `Gateway closed: ${event.code} - ${event.reason}`,
+                gateway: this,
+                rest: this.rest,
+            })
         }
 
         return this
