@@ -16,7 +16,7 @@
     "exports": "./dist/index.cjs",
     "repository": {
         "type": "git",
-        "url": "https://github.com/andrewdku/guilds.js"
+        "url": "https://github.com/guildsjs/guilds.js"
     },
     "private": false,
     "publishConfig": {

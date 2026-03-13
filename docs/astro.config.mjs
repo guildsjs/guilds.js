@@ -24,7 +24,7 @@ export default defineConfig({
                 {
                     icon: "github",
                     label: "GitHub",
-                    href: "https://github.com/andrewdku/guilds.js",
+                    href: "https://github.com/guildsjs/guilds.js",
                 },
             ],
             sidebar: [
