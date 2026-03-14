@@ -4,11 +4,18 @@ import { RESTManager } from "@/classes/rest-manager"
 
 /** Class representing a Discord client */
 export class Client {
+    #token: string
+
     /** Used for connecting to Discord's gateway */
     public gateway: Gateway
 
     /** Used for REST API calls */
     public rest: RESTManager
+
+    /** Client token used for authorization */
+    public get token() {
+        return this.#token
+    }
 
     /**
      * Instantiate a new Client
@@ -22,6 +29,7 @@ export class Client {
 
         this.gateway = props.gateway
         this.rest = props.rest
+        this.#token = this.gateway.token
 
         return this
     }
