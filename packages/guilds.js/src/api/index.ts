@@ -353,7 +353,7 @@ export const TeamMemberRoleTypes = {
     Developer: "developer",
     /**
      * No value for the Owner role exists. It's
-     * represented by `Team.owner_user_id` instead.
+     * represented by {@link Team.owner_user_id} instead.
      */
     Owner: undefined,
     "Read-only": "read_only",

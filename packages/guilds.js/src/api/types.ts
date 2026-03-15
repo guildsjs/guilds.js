@@ -793,7 +793,7 @@ export interface Resolved {
 
 /** @see https://docs.discord.com/developers/topics/permissions#role-object */
 export interface Role {
-    /** @deprecated */ color: number
+    /** @deprecated Use {@link Role.colors} instead. */ color: number
     colors: RoleColors
     flags: number
     hoist: boolean
