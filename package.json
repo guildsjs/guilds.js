@@ -1,0 +1,26 @@
+{
+    "name": "@guilds/repo",
+    "homepage": "https://guilds.js.org",
+    "version": "0.0.0",
+    "license": "UNLICENSED",
+    "private": true,
+    "workspaces": [
+        "docs/",
+        "packages/*"
+    ],
+    "scripts": {
+        "build": "turbo run build",
+        "dev": "turbo run dev",
+        "format": "turbo run format",
+        "lint": "turbo run lint"
+    },
+    "devDependencies": {
+        "prettier": "^3.8.1",
+        "turbo": "^2.9.1",
+        "typescript": "^5.9.3"
+    },
+    "packageManager": "pnpm@10.33.0",
+    "engines": {
+        "node": ">=22"
+    }
+}

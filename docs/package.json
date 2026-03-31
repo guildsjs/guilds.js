@@ -1,0 +1,22 @@
+{
+    "name": "@guilds/docs",
+    "type": "module",
+    "version": "0.0.0",
+    "scripts": {
+        "astro": "astro",
+        "build": "astro build",
+        "dev": "astro dev",
+        "format": "prettier --write astro.config.mjs src/content.config.ts src/content/docs/**/*.md* --ignore-path ../.prettierignore",
+        "preview": "astro preview",
+        "start": "astro dev"
+    },
+    "dependencies": {
+        "@astrojs/starlight": "^0.38.2",
+        "astro": "^6.1.2",
+        "sharp": "^0.34.5",
+        "starlight-theme-rapide": "^0.5.2",
+        "starlight-typedoc": "^0.21.5",
+        "typedoc": "^0.28.18",
+        "typedoc-plugin-markdown": "^4.11.0"
+    }
+}

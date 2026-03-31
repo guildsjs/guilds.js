@@ -1,0 +1,52 @@
+{
+    "name": "@guilds/core",
+    "description": "Node.js library for using Discord's API and gateway",
+    "homepage": "https://guilds.js.org",
+    "version": "0.0.1",
+    "license": "UNLICENSED",
+    "scripts": {
+        "build": "tsdown --config ./tsdown.config.mts; node ../../scripts/version.mjs",
+        "format": "prettier --write . --config ../../.prettierrc.json --ignore-path ../../.prettierignore",
+        "lint": "tsc --noEmit; prettier --check . --config ../../.prettierrc.json --ignore-path ../../.prettierignore",
+        "prepublish": "tsdown --config ./tsdown.config.mts; node ../../scripts/version.mjs"
+    },
+    "main": "./dist/index.cjs",
+    "types": "./dist/index.d.cts",
+    "exports": "./dist/index.cjs",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/guildsjs/guilds.js"
+    },
+    "private": false,
+    "publishConfig": {
+        "access": "public"
+    },
+    "devDependencies": {
+        "@types/node": "^25.5.0",
+        "prettier": "^3.8.1",
+        "tsdown": "^0.21.7",
+        "typescript": "^5.9.3"
+    },
+    "files": [
+        "dist",
+        "LICENSE",
+        "package.json",
+        "README.md"
+    ],
+    "keywords": [
+        "api",
+        "bot",
+        "discord",
+        "discord-bot",
+        "javascript",
+        "library",
+        "module",
+        "node",
+        "npm",
+        "websocket",
+        "ws"
+    ],
+    "engines": {
+        "node": ">=22"
+    }
+}
