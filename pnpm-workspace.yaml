@@ -1,6 +1,6 @@
 packages:
+    - core/
     - docs/
-    - packages/*
 
 onlyBuiltDependencies:
     - esbuild

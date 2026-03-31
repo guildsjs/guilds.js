@@ -5,8 +5,8 @@
     "license": "UNLICENSED",
     "private": true,
     "workspaces": [
-        "docs/",
-        "packages/*"
+        "core/",
+        "docs/"
     ],
     "scripts": {
         "build": "turbo run build",

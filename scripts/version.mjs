@@ -5,7 +5,7 @@ import path from "node:path"
 import url from "node:url"
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url))
-const corePackageDir = path.join(__dirname, "..", "packages", "core")
+const corePackageDir = path.join(__dirname, "..", "core")
 const dist = path.resolve(corePackageDir, "dist")
 
 try {

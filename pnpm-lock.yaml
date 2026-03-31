@@ -18,6 +18,21 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
 
+  core:
+    devDependencies:
+      '@types/node':
+        specifier: ^25.5.0
+        version: 25.5.0
+      prettier:
+        specifier: ^3.8.1
+        version: 3.8.1
+      tsdown:
+        specifier: ^0.21.7
+        version: 0.21.7(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(typescript@5.9.3)
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+
   docs:
     dependencies:
       '@astrojs/starlight':
@@ -41,21 +56,6 @@ importers:
       typedoc-plugin-markdown:
         specifier: ^4.11.0
         version: 4.11.0(typedoc@0.28.18(typescript@5.9.3))
-
-  packages/core:
-    devDependencies:
-      '@types/node':
-        specifier: ^25.5.0
-        version: 25.5.0
-      prettier:
-        specifier: ^3.8.1
-        version: 3.8.1
-      tsdown:
-        specifier: ^0.21.7
-        version: 0.21.7(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(typescript@5.9.3)
-      typescript:
-        specifier: ^5.9.3
-        version: 5.9.3
 
 packages:
 
